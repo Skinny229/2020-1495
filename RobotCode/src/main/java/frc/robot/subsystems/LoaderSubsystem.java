@@ -8,19 +8,23 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 
-public class LoaderSubsystem extends CommandBase
+public class LoaderSubsystem extends SubsystemBase
 {
 
+    private VictorSP victorSP;
 
-   //Just the roller
-
-    public LoaderSubsystem(){
-        
+    public LoaderSubsystem(int shooterPort, boolean isInverted){
+        System.out.println("Shooter Subsystem with Victor PWM PORT:"  + shooterPort);
+        victorSP = new VictorSP(shooterPort);
+        victorSP.setSafetyEnabled(false);
+        victorSP.setInverted(isInverted);
     }
 
 
-    
-
+    public void shootForward(double speed){
+        speed = Math.abs(speed);
+        victorSP.set(speed);
+    }
 
 
 }

@@ -7,29 +7,23 @@ import edu.wpi.first.wpilibj.Notifier;
 
 public class ReactiveLeds {
 
-	I2C i2;
-
-	public ArrayList<String> cmdQueue = new ArrayList<String>();
-
-	Notifier notify = new Notifier(new CommandCenter());
+	private I2C i2;
+	private ArrayList<Character> cmdQueue = new ArrayList<Character>();
+	private Notifier arduinoCommThread = new Notifier(new CommandCenter());
 
 	public ReactiveLeds() {
 		i2 = new I2C(Port.kOnboard, 4);
-		notify.startPeriodic(0.05);
+		arduinoCommThread.startPeriodic(0.05);
 	}
 
-	public void sendToArduino(String input) {
-		char[] CharArray = input.toCharArray();
-		byte[] WriteData = new byte[CharArray.length];
-        for (int i = 0; i < CharArray.length; i++) 
-        {
-			WriteData[i] = (byte) CharArray[i];
-		}
-
+    public void sendToArduino(char input)
+    {
+		byte[] WriteData = new byte[1];
+        WriteData[0] = (byte) input;
 		i2.writeBulk(WriteData);
 	}
 
-	public void addCmd(String cmd) {
+	public void addCmd(Character cmd) {
 		cmdQueue.add(cmd);
     }
     
@@ -38,7 +32,7 @@ public class ReactiveLeds {
 
 		@Override
 		public void run() {
-			sendToArduino("Z");
+			sendToArduino('Z');
 			if (cmdQueue.size() == 0) {
 
 			} else {
