@@ -14,7 +14,7 @@ public class RigoVision {
 
 
     //Data
-    private static NetworkTableEntry hasTarget;
+    private static NetworkTableEntry targetCount;
     private static NetworkTableEntry horizontalOffset;
     private static NetworkTableEntry verticalOffset;
     private static NetworkTableEntry targetArea;
@@ -39,12 +39,23 @@ public class RigoVision {
         //Set up key entries and table
 
         visionTable = NetworkTableInstance.getDefault().getTable("limelight");
-        hasTarget = visionTable.getEntry("tv");
+        targetCount = visionTable.getEntry("tv");
+        horizontalOffset = visionTable.getEntry("key");
+        verticalOffset = visionTable.getEntry("key");
+        targetArea = visionTable.getEntry("key");
+        rotationTarget = visionTable.getEntry("key");
+
+
+        ledMode = visionTable.getEntry("key");
+        camMode = visionTable.getEntry("key");
+        pipeline = visionTable.getEntry("key");
+        streamMode = visionTable.getEntry("key");
+
     }
 
 
     public static int getTargetCount(){
-        return (int) hasTarget.getDouble(0);
+        return (int) targetCount.getDouble(0);
     }
 
 }
