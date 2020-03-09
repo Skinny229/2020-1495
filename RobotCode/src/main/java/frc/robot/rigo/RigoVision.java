@@ -42,9 +42,9 @@ public class RigoVision {
         hasTarget = visionTable.getEntry("tv");
     }
 
-    //Getters
-    public static boolean hasValidTargets() {
-        return hasTarget.getDouble(0) == 0;
+
+    public static int getTargetCount(){
+        return (int) hasTarget.getDouble(0);
     }
 
 }
