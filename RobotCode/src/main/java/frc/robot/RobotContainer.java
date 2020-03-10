@@ -40,7 +40,7 @@ public class RobotContainer {
 
 
   Joystick stick = new Joystick(0);
-  JoystickButton button = new JoystickButton(stick, 0);
+  JoystickButton button = new JoystickButton(stick, 1);
 
   /**
    * Use this method to define your button->command mappings.  Buttons can be created by
